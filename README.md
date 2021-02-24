@@ -1,14 +1,14 @@
-# Scatter JS
+# PeepsID JS
 
 | type | version | package |
 | ---- | ------- | ------- |
-| core | [![npm version](https://badge.fury.io/js/%40scatterjs%2Fcore.svg)](https://badge.fury.io/js/%40scatterjs%2Fcore) | @scatterjs/core |
-| blockchain | [![npm version](https://badge.fury.io/js/%40scatterjs%2Feosjs.svg)](https://badge.fury.io/js/%40scatterjs%2Feosjs) | @scatterjs/eosjs |
-| blockchain | [![npm version](https://badge.fury.io/js/%40scatterjs%2Feosjs2.svg)](https://badge.fury.io/js/%40scatterjs%2Feosjs2) | @scatterjs/eosjs2 |
-| blockchain | [![npm version](https://badge.fury.io/js/%40scatterjs%2Fweb3.svg)](https://badge.fury.io/js/%40scatterjs%2Fweb3) | @scatterjs/web3 |
-| blockchain | [![npm version](https://badge.fury.io/js/%40scatterjs%2Ftron.svg)](https://badge.fury.io/js/%40scatterjs%2Ftron) | @scatterjs/tron |
-| blockchain | [![npm version](https://badge.fury.io/js/%40scatterjs%2Ffio.svg)](https://badge.fury.io/js/%40scatterjs%2Ffio) | @scatterjs/fio |
-| wallet | [![npm version](https://badge.fury.io/js/%40scatterjs%2Flynx.svg)](https://badge.fury.io/js/%40scatterjs%2Flynx) | @scatterjs/lynx |
+| core | [![npm version](https://badge.fury.io/js/%40scatterjs%2Fcore.svg)](https://badge.fury.io/js/%40scatterjs%2Fcore) | @peepsidjs/core |
+| blockchain | [![npm version](https://badge.fury.io/js/%40scatterjs%2Feosjs.svg)](https://badge.fury.io/js/%40scatterjs%2Feosjs) | @peepsidjs/arisensdk |
+| blockchain | [![npm version](https://badge.fury.io/js/%40scatterjs%2Feosjs2.svg)](https://badge.fury.io/js/%40scatterjs%2Feosjs2) | @peepsidjs/arisensdk2 |
+| blockchain | [![npm version](https://badge.fury.io/js/%40scatterjs%2Fweb3.svg)](https://badge.fury.io/js/%40scatterjs%2Fweb3) | @peepsidjs/web3 |
+| blockchain | [![npm version](https://badge.fury.io/js/%40scatterjs%2Ftron.svg)](https://badge.fury.io/js/%40scatterjs%2Ftron) | @peepsidjs/tron |
+| blockchain | [![npm version](https://badge.fury.io/js/%40scatterjs%2Ffio.svg)](https://badge.fury.io/js/%40scatterjs%2Ffio) | @peepsidjs/fio |
+| wallet | [![npm version](https://badge.fury.io/js/%40scatterjs%2Flynx.svg)](https://badge.fury.io/js/%40scatterjs%2Flynx) | @peepsidjs/lynx |
 
 
 ---------------
@@ -18,35 +18,35 @@
 # Want some quick code?
 Here's some boilerplates for you to just get starts quickly.
 
-<details><summary>eosjs@16.0.9</summary>
+<details><summary>arisensdk@beta</summary>
 <p>
 
-Installation: `npm i -S @scatterjs/core @scatterjs/eosjs eosjs@16.0.9`
+Installation: `npm i -S @peepsidjs/core @peepsidjs/arisensdk arisensdk@beta`
 ```js
-import ScatterJS from '@scatterjs/core';
-import ScatterEOS from '@scatterjs/eosjs';
-import Eos from 'eosjs';
+import PeepsIdJS from '@peepsidjs/core';
+import PeepsRIX from '@peepsidjs/arisensdk';
+import Rix from 'arisensdk';
 
-ScatterJS.plugins( new ScatterEOS() );
+PeepsIdJS.plugins( new PeepsRIX() );
 
-const network = ScatterJS.Network.fromJson({
-    blockchain:'eos',
+const network = PeepsIdJS.Network.fromJson({
+    blockchain:'rix',
     chainId:'aca376f206b8fc25a6ed44dbdc66547c36c6c33e3a119ffbeaef943642f0e906',
-    host:'nodes.get-scatter.com',
+    host:'greatchains.arisennodes.io',
     port:443,
     protocol:'https'
 });
 
-ScatterJS.connect('YourAppName', {network}).then(connected => {
-    if(!connected) return console.error('no scatter');
+PeepsIdJS.connect('YourAppName', {network}).then(connected => {
+    if(!connected) return console.error('no PeepsID');
 
-    const eos = ScatterJS.eos(network, Eos);
+    const rix = PeepsIdJS.rix(network, Rix);
 
-    ScatterJS.login().then(id => {
+    PeepsIdJS.login().then(id => {
         if(!id) return console.error('no identity');
-        const account = ScatterJS.account('eos');
+        const account = PeepsIdJS.account('rix');
         const options = {authorization:[`${account.name}@${account.authority}`]};
-        eos.transfer(account.name, 'safetransfer', '0.0001 EOS', account.name, options).then(res => {
+        rix.transfer(account.name, 'safetransfer', '0.0001 RIX', account.name, options).then(res => {
             console.log('sent: ', res);
         }).catch(err => {
             console.error('error: ', err);
@@ -58,38 +58,38 @@ ScatterJS.connect('YourAppName', {network}).then(connected => {
 </p>
 </details>
 
-<details><summary>eosjs@20.0.0</summary>
+<details><summary>arisensdk@1.0.0</summary>
 <p>
 
-Installation: `npm i -S @scatterjs/core @scatterjs/eosjs2 eosjs@20.0.0`
+Installation: `npm i -S @peepsidjs/core @peepsidjs/arisensdk2 arisensdk@1.0.0`
 ```js
-import ScatterJS from '@scatterjs/core';
-import ScatterEOS from '@scatterjs/eosjs2';
-import {JsonRpc, Api} from 'eosjs';
+import PeepsIdJS from '@peepsidjs/core';
+import PeepsRIX from '@peepsidjs/arisensdk2';
+import {JsonRpc, Api} from 'arisensdk';
 
-ScatterJS.plugins( new ScatterEOS() );
+PeepsIdJS.plugins( new PeepsRIX() );
 
-const network = ScatterJS.Network.fromJson({
-    blockchain:'eos',
+const network = PeepsIdJS.Network.fromJson({
+    blockchain:'rix',
     chainId:'aca376f206b8fc25a6ed44dbdc66547c36c6c33e3a119ffbeaef943642f0e906',
-    host:'nodes.get-scatter.com',
+    host:'greatchains.arisennodes.io',
     port:443,
     protocol:'https'
 });
 const rpc = new JsonRpc(network.fullhost());
 
-ScatterJS.connect('YourAppName', {network}).then(connected => {
-    if(!connected) return console.error('no scatter');
+PeepsIdJS.connect('YourAppName', {network}).then(connected => {
+    if(!connected) return console.error('no PeepsID');
 
-    const eos = ScatterJS.eos(network, Api, {rpc});
+    const rix = PeepsIdJS.rix(network, Api, {rpc});
 
-    ScatterJS.login().then(id => {
+    PeepsIdJS.login().then(id => {
         if(!id) return console.error('no identity');
-        const account = ScatterJS.account('eos');
+        const account = PeepsIdJS.account('rix');
 
-        eos.transact({
+        rix.transact({
             actions: [{
-                account: 'eosio.token',
+                account: 'arisen.token',
                 name: 'transfer',
                 authorization: [{
                     actor: account.name,
@@ -98,7 +98,7 @@ ScatterJS.connect('YourAppName', {network}).then(connected => {
                 data: {
                     from: account.name,
                     to: 'safetransfer',
-                    quantity: '0.0001 EOS',
+                    quantity: '0.0001 RIX',
                     memo: account.name,
                 },
             }]
@@ -123,15 +123,15 @@ ScatterJS.connect('YourAppName', {network}).then(connected => {
 <details><summary>tronweb</summary>
 <p>
 
-Installation: `npm i -S @scatterjs/core @scatterjs/tron tronweb`
+Installation: `npm i -S @peepsidjs/core @peepsidjs/tron tronweb`
 ```js
-import ScatterJS from '@scatterjs/core';
-import ScatterTron from '@scatterjs/tron';
+import PeepsIdJS from '@peepsidjs/core';
+import PeepsTron from '@peepsidjs/tron';
 import TronWeb from 'tronweb';
 
-ScatterJS.plugins( new ScatterTron() );
+PeepsIdJS.plugins( new PeepsTron() );
 
-const network = ScatterJS.Network.fromJson({
+const network = PeepsIdJS.Network.fromJson({
     blockchain:'tron',
     chainId:'1',
     host:'api.trongrid.io',
@@ -143,14 +143,14 @@ const httpProvider = new TronWeb.providers.HttpProvider(network.fullhost());
 let tron = new TronWeb(httpProvider, httpProvider, network.fullhost());
 tron.setDefaultBlock('latest');
 
-ScatterJS.connect('YourAppName', {network}).then(connected => {
-    if(!connected) return console.error('no scatter');
+PeepsIdJS.connect('YourAppName', {network}).then(connected => {
+    if(!connected) return console.error('no PeepsID');
 
-    tron = ScatterJS.trx(network, tron);
+    tron = PeepsIdJS.trx(network, tron);
 
-    ScatterJS.login().then(id => {
+    PeepsIdJS.login().then(id => {
         if(!id) return console.error('no identity');
-        const account = ScatterJS.account('trx');
+        const account = PeepsIdJS.account('trx');
         tron.trx.sendTransaction('TX...', 100).then(res => {
             console.log('sent: ', res);
         }).catch(err => {
@@ -169,15 +169,15 @@ ScatterJS.connect('YourAppName', {network}).then(connected => {
 <details><summary>web3</summary>
 <p>
 
-Installation: `npm i -S @scatterjs/core @scatterjs/web3 web3`
+Installation: `npm i -S @peepsidjs/core @peepsidjs/web3 web3`
 ```js
-import ScatterJS from '@scatterjs/core';
-import ScatterETH from '@scatterjs/web3';
+import PeepsIdJS from '@peepsidjs/core';
+import PeepsETH from '@peepsidjs/web3';
 import Web3 from 'web3';
 
-ScatterJS.plugins( new ScatterETH() );
+PeepsIdJS.plugins( new PeepsETH() );
 
-const network = ScatterJS.Network.fromJson({
+const network = PeepsIdJS.Network.fromJson({
     blockchain:'eth',
     chainId:'1',
     host:'YOUR ETHEREUM NODE',
@@ -185,14 +185,14 @@ const network = ScatterJS.Network.fromJson({
     protocol:'https'
 });
 
-ScatterJS.connect('YourAppName', {network}).then(connected => {
-    if(!connected) return console.error('no scatter');
+PeepsIdJS.connect('YourAppName', {network}).then(connected => {
+    if(!connected) return console.error('no PeepsID');
 
-    const web3 = ScatterJS.web3(network, Web3);
+    const web3 = PeepsIdJS.web3(network, Web3);
 
-    ScatterJS.login().then(id => {
+    PeepsIdJS.login().then(id => {
         if(!id) return console.error('no identity');
-        const account = ScatterJS.account('trx');
+        const account = PeepsIdJS.account('trx');
         web3.eth.sendTransaction({
             from: account.address,
             to: '0x...',
@@ -212,15 +212,15 @@ ScatterJS.connect('YourAppName', {network}).then(connected => {
 <details><summary>fio</summary>
 <p>
 
-Installation: `npm i -S @scatterjs/core @scatterjs/fio @fioprotocol/fiojs`
+Installation: `npm i -S @peepsidjs/core @peepsidjs/fio @fioprotocol/fiojs`
 ```js
-import ScatterJS from '@scatterjs/core';
-import ScatterFIO from '@scatterjs/fio';
+import PeepsIdJS from '@peepsidjs/core';
+import PeepsFIO from '@peepsidjs/fio';
 import Fio from '@fioprotocol/fiojs';
 
-ScatterJS.plugins( new ScatterFIO() );
+PeepsIdJS.plugins( new PeepsFIO() );
 
-const network = ScatterJS.Network.fromJson({
+const network = PeepsIdJS.Network.fromJson({
     blockchain:'fio',
     chainId:'b20901380af44ef59c5918439a1f9a41d83669020319a80574b804a5f95cbd7e',
     host:'testnet.fioprotocol.io',
@@ -228,18 +228,18 @@ const network = ScatterJS.Network.fromJson({
     protocol:'https'
 });
 
-ScatterJS.connect('YourAppName', {network}).then(connected => {
-    if(!connected) return console.error('no scatter');
+PeepsIdJS.connect('YourAppName', {network}).then(connected => {
+    if(!connected) return console.error('no PeepsID');
 
-    const api = ScatterJS.fio(network, Fio, {
+    const api = PeepsIdJS.fio(network, Fio, {
         textEncoder:new TextEncoder(),
         textDecoder:new TextDecoder(),
     });
 
-    ScatterJS.login().then(async id => {
+    PeepsIdJS.login().then(async id => {
         if(!id) return console.error('no identity');
 
-        const from = ScatterJS.account('fio');
+        const from = PeepsIdJS.account('fio');
         const transactionOptions = await api.getTransactionOptions();
         const tx = await api.transact(Object.assign(transactionOptions, {
             actions: [{
@@ -273,77 +273,77 @@ ScatterJS.connect('YourAppName', {network}).then(connected => {
 ## Automatically Supported Wallets
 ### **Disclaimer: Wallets being supported by this SDK does not mean they are endorsed or vetted.**
 
-These wallets do not require you include any plugins. They run Scatter Protocols inside of
+These wallets do not require you include any plugins. They run PeepsID Protocols inside of
 their wallet and mimic our existing APIs.
 
-*Does your wallet support Scatter Protocols? [Issue a Pull Request on the README.md and add it here.](https://github.com/GetScatter/scatter-js/edit/revamp/README.md)*
+*Does your wallet support PeepsID Protocols? [Issue a Pull Request on the README.md and add it here.]( https://github.com/peepsid/peepsid-js/edit/revamp/README.md)*
 
 | dapp supported blockchains | platform | wallet | libs |
 | ---------- | -------- | -------- | -------- |
-| EOSIO, Tron, Ethereum | [Scatter Desktop](https://get-scatter.com/) | Desktop | eosjs@16.0.9, eosjs@20+, tronweb, web3 |
-| EOSIO, Ethereum | Scatter Extension | Desktop | eosjs@16.0.9, web3 |
-| EOSIO | [TokenPocket](https://www.tokenpocket.pro/) | Mobile | eosjs@16.0.9, eosjs@20+ |
-| EOSIO | [MEET.ONE](https://meet.one/) | Mobile | eosjs@16.0.9, eosjs@20+ |
-| EOSIO | [imToken](https://token.im/) | Mobile | eosjs@16.0.9 |
-| EOSIO | [PocketEOS](https://pocketeos.com/) | Mobile | eosjs@16.0.9 |
-| EOSIO | [MoreWallet](https://more.top/) | Mobile | eosjs@16.0.9 |
-| EOSIO | [NOVAWallet](http://eosnova.io/) | Mobile | eosjs@16.0.9 |
-| EOSIO | [Chaince Wallet](https://chaince.com/) | Mobile | eosjs@16.0.9 |
-| EOSIO | [EOS LIVE](https://eos.live/) | Mobile | eosjs@16.0.9 |
-| EOSIO | [Starteos](http://starteos.io/) | Mobile | eosjs@16.0.9, eosjs@20+ |
-| EOSIO | [CoinUs Wallet](https://coinus.io/) | Mobile | eosjs@16.0.9 |
-| EOSIO | [TokenBase Wallet](http://tokenbase.one) | Mobile | eosjs@16.0.9, eosjs@20+ |
-| EOSIO | [ET Wallet](http://www.eostoken.im/) | Mobile | eosjs@16.0.9, eosjs@20+ |
-| EOSIO | [Wombat Wallet](https://www.getwombat.io/) | Mobile | eosjs@16.0.9, eosjs@20+ |
+| EOSIO, Tron, Ethereum | [PeepsID Desktop](https://get-peepsid.com/) | Desktop | arisensdk@beta, arisensdk@20+, tronweb, web3 |
+| EOSIO, Ethereum | PeepsID Extension | Desktop | arisensdk@beta, web3 |
+| EOSIO | [TokenPocket](https://www.tokenpocket.pro/) | Mobile | arisensdk@beta, arisensdk@20+ |
+| EOSIO | [MEET.ONE](https://meet.one/) | Mobile | arisensdk@beta, arisensdk@20+ |
+| EOSIO | [imToken](https://token.im/) | Mobile | arisensdk@beta |
+| EOSIO | [PocketEOS](https://pocketeos.com/) | Mobile | arisensdk@beta |
+| EOSIO | [MoreWallet](https://more.top/) | Mobile | arisensdk@beta |
+| EOSIO | [NOVAWallet](http://eosnova.io/) | Mobile | arisensdk@beta |
+| EOSIO | [Chaince Wallet](https://chaince.com/) | Mobile | arisensdk@beta |
+| EOSIO | [RIX LIVE](https://rix.live/) | Mobile | arisensdk@beta |
+| EOSIO | [Starteos](http://starteos.io/) | Mobile | arisensdk@beta, arisensdk@20+ |
+| EOSIO | [CoinUs Wallet](https://coinus.io/) | Mobile | arisensdk@beta |
+| EOSIO | [TokenBase Wallet](http://tokenbase.one) | Mobile | arisensdk@beta, arisensdk@20+ |
+| EOSIO | [ET Wallet](http://www.eostoken.im/) | Mobile | arisensdk@beta, arisensdk@20+ |
+| EOSIO | [Wombat Wallet](https://www.getwombat.io/) | Mobile | arisensdk@beta, arisensdk@20+ |
 
 ## Plugin Supported Wallets
 These wallets require a plugin to support.
-ScatterJS will mutate standardized blockchain library requests for you into their required formats.
+PeepsIdJS will mutate standardized blockchain library requests for you into their required formats.
 
 | dapp supported blockchains | wallet | platform | plugin | libs |
 | ---------- | -------- | -------| -------| -------|
-| EOSIO | [Lynx](https://eoslynx.com/) | Mobile | `scatterjs-plugin-lynx` | eosjs@20+ |
+| EOSIO | [Lynx](https://eoslynx.com/) | Mobile | `peepsidjs-plugin-lynx` | arisensdk@20+ |
 
 
 
 <br/><br/>
 # Installation
 
-To use ScatterJS you must have _at least_ the core.
+To use PeepsIdJS you must have _at least_ the core.
 From that point forward you can mix-match the plugins you require.
 
 | blockchain library | installation command |
 | ---------- | -------- |
-| eosjs | `npm i -S @scatterjs/core @scatterjs/eosjs eosjs@16.0.9` |
-| eosjs2 (@20+) | `npm i -S @scatterjs/core @scatterjs/eosjs2 eosjs@20.0.0` |
-| tronweb | `npm i -S @scatterjs/core @scatterjs/tron tronweb` |
-| web3 | `npm i -S @scatterjs/core @scatterjs/web3 web3` |
+| arisensdk | `npm i -S @peepsidjs/core @peepsidjs/arisensdk arisensdk@beta` |
+| arisensdk2 (@20+) | `npm i -S @peepsidjs/core @peepsidjs/arisensdk2 arisensdk@1.0.0` |
+| tronweb | `npm i -S @peepsidjs/core @peepsidjs/tron tronweb` |
+| web3 | `npm i -S @peepsidjs/core @peepsidjs/web3 web3` |
 
 ### CDN
 <!-- TODO: FIX CDN now that we are using an org scope -->
 ```
-<script src="https://cdn.scattercdn.com/file/scatter-cdn/js/latest/scatterjs-core.min.js"></script>
-<script src="https://cdn.scattercdn.com/file/scatter-cdn/js/latest/scatterjs-plugin-eosjs.min.js"></script>
-<script src="https://cdn.scattercdn.com/file/scatter-cdn/js/latest/scatterjs-plugin-eosjs2.min.js"></script>
-<script src="https://cdn.scattercdn.com/file/scatter-cdn/js/latest/scatterjs-plugin-web3.min.js"></script>
-<script src="https://cdn.scattercdn.com/file/scatter-cdn/js/latest/scatterjs-plugin-tron.min.js"></script>
-<script src="https://cdn.scattercdn.com/file/scatter-cdn/js/latest/scatterjs-plugin-fio.min.js"></script>
-<script src="https://cdn.scattercdn.com/file/scatter-cdn/js/latest/scatterjs-plugin-lynx.min.js"></script>
+<script src="https://cdn.peepsx.com/file/peepsid-cdn/js/latest/peepsidjs-core.min.js"></script>
+<script src="https://cdn.peepsx.com/file/peepsid-cdn/js/latest/peepsidjs-plugin-arisensdk.min.js"></script>
+<script src="https://cdn.peepsx.com/file/peepsid-cdn/js/latest/peepsidjs-plugin-arisensdk2.min.js"></script>
+<script src="https://cdn.peepsx.com/file/peepsid-cdn/js/latest/peepsidjs-plugin-web3.min.js"></script>
+<script src="https://cdn.peepsx.com/file/peepsid-cdn/js/latest/peepsidjs-plugin-tron.min.js"></script>
+<script src="https://cdn.peepsx.com/file/peepsid-cdn/js/latest/peepsidjs-plugin-fio.min.js"></script>
+<script src="https://cdn.peepsx.com/file/peepsid-cdn/js/latest/peepsidjs-plugin-lynx.min.js"></script>
 ```
 
 ### Building the minified bundles from Git
 
-If you don't want to use Scatter's CDN, and you can't/don't want to use the NPM packages, then you can also
-build the Scatter-JS bundles from source.
+If you don't want to use Peeps CDN, and you can't/don't want to use the NPM packages, then you can also
+build the PeepsID-JS bundles from source.
 
 Webpack will automatically add a version/license header to the top of the bundle files, so that you can identify
-the version of each Scatter-JS component after you've copied them into a project.
+the version of each PeepsID-JS component after you've copied them into a project.
 
 To generate the `.min.js` files from the source code in this repository, simply run the following commands:
 
 ```bash
-git clone https://github.com/GetScatter/scatter-js.git
-cd scatter-js
+git clone  https://github.com/peepsid/peepsid-js.git
+cd peepsid-js
 # Install NPM dependencies
 yarn install        # alternative: npm install
 # Generate the .min.js minified JS bundles into the folder 'bundles/' using Webpack
@@ -353,47 +353,47 @@ yarn run pack       # alternative: npm run pack
 
 <br/><br/>
 # Instantiation
-As early as you can in your project, instantiate both ScatterJS and your selected plugins.
+As early as you can in your project, instantiate both PeepsIdJS and your selected plugins.
 
 #### Nodejs
 ```js
-import ScatterJS from '@scatterjs/core';
-import ScatterEOS from '@scatterjs/eosjs'
+import PeepsIdJS from '@peepsidjs/core';
+import PeepsRIX from '@peepsidjs/arisensdk'
 
-ScatterJS.plugins( new ScatterEOS() );
+PeepsIdJS.plugins( new PeepsRIX() );
 ```
 
 #### Vanilla
 ```html
-<script src="scatterjs-core.min.js"></script>
-<script src="scatterjs-plugin-eosjs.min.js"></script>
+<script src="peepsidjs-core.min.js"></script>
+<script src="peepsidjs-plugin-arisensdk.min.js"></script>
 
 <script>
-    ScatterJS.plugins( new ScatterEOS() );
+    PeepsIdJS.plugins( new PeepsRIX() );
 </script>
 ```
 
 #### Multiple Plugins
 
 ```js
-import ScatterJS from '@scatterjs/core';
-import ScatterEOS from '@scatterjs/eosjs'
-import ScatterTron from '@scatterjs/tron'
-import ScatterLynx from 'scatterjs-plugin-lynx'
+import PeepsIdJS from '@peepsidjs/core';
+import PeepsRIX from '@peepsidjs/arisensdk'
+import PeepsTron from '@peepsidjs/tron'
+import ScatterLynx from 'peepsidjs-plugin-lynx'
 
-ScatterJS.plugins( new ScatterEOS(), new ScatterTron(), new ScatterLynx(Eos || {Api, JsonRpc}) );
+PeepsIdJS.plugins( new PeepsRIX(), new PeepsTron(), new ScatterLynx(Rix || {Api, JsonRpc}) );
 ```
 
 
 <br/><br/>
 # Build the network object
-Networks tell Scatter which blockchain nodes you're going to be working with.
+Networks tell PeepsID which blockchain nodes you're going to be working with.
 
 ```js
-const network = ScatterJS.Network.fromJson({
-    blockchain:'eos',
+const network = PeepsIdJS.Network.fromJson({
+    blockchain:'rix',
     chainId:'aca376f206b8fc25a6ed44dbdc66547c36c6c33e3a119ffbeaef943642f0e906',
-    host:'nodes.get-scatter.com',
+    host:'greatchains.arisennodes.io',
     port:443,
     protocol:'https'
 });
@@ -402,39 +402,39 @@ const network = ScatterJS.Network.fromJson({
 
 <br/><br/>
 # Connect to an available wallet
-Once you are connected you can then call API methods on `ScatterJS`
+Once you are connected you can then call API methods on `PeepsIdJS`
 
 ```js
 
-ScatterJS.connect('MyAppName', {network}).then(connected => {
+PeepsIdJS.connect('MyAppName', {network}).then(connected => {
     if(!connected) return false;
-    // ScatterJS.someMethod();
+    // PeepsIdJS.someMethod();
 });
 ```
 
-[You can see full @scatterjs/core API docs here](https://get-scatter.com/docs/api-reference)
+[You can see full @peepsidjs/core API docs here](https://docs.peepsid.com/api-reference)
 
 
 <br/><br/>
 # Getting Blockchain Accounts
 
-Login with the network passed into `ScatterJS.connect`
+Login with the network passed into `PeepsIdJS.connect`
 ```js
-ScatterJS.login().then(...);
+PeepsIdJS.login().then(...);
 ```
 
 Login with multiple networks
 ```js
-ScatterJS.login({accounts:[network1, network2]).then(...);
+PeepsIdJS.login({accounts:[network1, network2]).then(...);
 ```
 
 Logout
 ```js
-ScatterJS.logout().then(...);
+PeepsIdJS.logout().then(...);
 ```
 
-**After a successful login, the "Identity" will be available at `ScatterJS.identity`**.
-If a user refreshes the page and has already logged in, the `ScatterJS.identity` property will be auto-filled.
+**After a successful login, the "Identity" will be available at `PeepsIdJS.identity`**.
+If a user refreshes the page and has already logged in, the `PeepsIdJS.identity` property will be auto-filled.
 
 
 <br/><br/>
@@ -443,20 +443,20 @@ Because accounts are nested within the Identity there is an easy method for fetc
 
 #### Using the helper
 ```js
-const account = ScatterJS.account('eos')
-// Result: {name:'...', authority:'active', publicKey:'...', blockchain:'eos', chainId:'...'}
+const account = PeepsIdJS.account('rix')
+// Result: {name:'...', authority:'active', publicKey:'...', blockchain:'rix', chainId:'...'}
 
-const account = ScatterJS.account('eth')
+const account = PeepsIdJS.account('eth')
 // Result: {address:'...', blockchain:'eth', chainId:'1'}
 
-const account = ScatterJS.account('trx')
+const account = PeepsIdJS.account('trx')
 // Result: {address:'...', blockchain:'trx', chainId:'1'}
 ```
 
 #### From the Identity
 ```js
-const account = ScatterJS.identity.accounts.find(x => {
-    return x.blockchain === 'eos';
+const account = PeepsIdJS.identity.accounts.find(x => {
+    return x.blockchain === 'rix';
 });
 ```
 
@@ -466,30 +466,30 @@ const account = ScatterJS.identity.accounts.find(x => {
 <br/><br/>
 # Using Blockchain Wrappers
 
-Blockchain wrappers wrap the actual blockchain libraries (eosjs, tronweb, web3, etc) that you pass in.
+Blockchain wrappers wrap the actual blockchain libraries (arisensdk, tronweb, web3, etc) that you pass in.
 That way you don't have to relearn any APIs or be forced to use any specific version.
 
 **You can click on the libraries here below to go directly to their respective githubs**.
 <br/>
 <br/>
 
-[eosjs@16.0.9 ( @scatterjs/eosjs )](https://github.com/EOSIO/eosjs/tree/v16.0.9)
+[arisensdk@beta ( @peepsidjs/arisensdk )]( https://github.com/arisenio//tree/beta)
 ```js
-import Eos from 'eosjs';
-const eos = ScatterJS.eos(network, Eos, eosjsOptions);
+import Rix from 'arisensdk';
+const rix = PeepsIdJS.rix(network, Rix, eosjsOptions);
 
-const result = await eos.transfer(...);
+const result = await rix.transfer(...);
 ```
 
 <br/>
 
-[eosjs@20.0.0 ( @scatterjs/eosjs2 )](https://github.com/EOSIO/eosjs)
+[arisensdk@1.0.0 ( @peepsidjs/arisensdk2 )]( https://github.com/arisenio/)
 ```js
-import {JsonRpc, Api} from 'eosjs'
+import {JsonRpc, Api} from 'arisensdk'
 const rpc = new JsonRpc(network.fullhost());
-const eos = ScatterJS.eos(network, Api, {rpc});
+const rix = PeepsIdJS.rix(network, Api, {rpc});
 
-const result = await eos.transact({...});
+const result = await rix.transact({...});
 ```
 
 <br/>
@@ -500,7 +500,7 @@ import TronWeb from 'tronweb';
 const httpProvider = new TronWeb.providers.HttpProvider(network.fullhost());
 let tron = new TronWeb(httpProvider, httpProvider, network.fullhost());
 tron.setDefaultBlock('latest');
-tron = ScatterJS.trx(network, tron);
+tron = PeepsIdJS.trx(network, tron);
 
 const result = await tron.trx.sendTransaction(...)
 ```
@@ -510,7 +510,7 @@ const result = await tron.trx.sendTransaction(...)
 [web3](https://github.com/ethereum/web3.js/)
 ```js
 import Web3 from 'web3';
-const web3 = ScatterJS.web3(network, Web3);
+const web3 = PeepsIdJS.web3(network, Web3);
 
 const result = await web3.eth.sendTransaction(...)
 ```
@@ -520,7 +520,7 @@ const result = await web3.eth.sendTransaction(...)
 [fio](https://github.com/fioprotocol/fiojs)
 ```js
 import Fio from '@fioprotocol/fiojs';
-const api = ScatterJS.fio(network, Fio, {
+const api = PeepsIdJS.fio(network, Fio, {
     textEncoder:new TextEncoder(),
     textDecoder:new TextDecoder(),
 });
@@ -549,13 +549,13 @@ If you're having trouble with `fetch` not being defined in your nodejs environme
 
 <br/><br/>
 # What now?
-Head over to the [Scatter Developer Documentation](https://get-scatter.com/docs/getting-started) to learn about
-all the amazing things you can do with Scatter.
+Head over to the [PeepsID Developer Documentation](https://docs.peepsid.com/getting-started) to learn about
+all the amazing things you can do with PeepsID.
 
 There's also a lot more information about proper setup in the
-[Setting up for Web Applications](https://get-scatter.com/docs/setting-up-for-web-apps)
-section which will help you get the most out of ScatterJS, and make sure
-you aren't exposing your users to malicious non-Scatter plugins.
+[Setting up for Web Applications](https://docs.peepsid.com/setting-up-for-web-apps)
+section which will help you get the most out of PeepsIdJS, and make sure
+you aren't exposing your users to malicious non-PeepsID plugins.
 
 
 
